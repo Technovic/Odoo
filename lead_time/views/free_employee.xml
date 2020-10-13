@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_inherit_employee_list_form" model="ir.ui.view">
+        <field name="name">view.inherit.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+              <xpath expr="//field[@name='parent_id']" position="after">
+                 <field name="task_id"/>
+            </xpath>
+        </field>
+    </record>
+      <record id="view_unallocated_employee_form" model="ir.ui.view">
+            <field name="name">Unallocated Employee Form</field>
+            <field name="model">unalloc.employee</field>
+            <field name="arch" type="xml">
+                <form string="Unallocated Employee Form">
+                    <sheet>
+                        <group>
+                     <field name="date"/>
+                     <field name="line_info" >
+                             <tree string="Line Details" create="false" delete="false">
+                                <field name="employee_name"/>
+                                </tree>
+                             </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+      </record>
+
+ <record id="hr_employee_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.search.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="after">
+                <filter name="Unallocated Employee" string="Unallocated Employees" domain="[('task_id', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_unallocated_employee_tree" model="ir.ui.view">
+            <field name="name">Unallocated Employee Tree</field>
+            <field name="model">unalloc.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Unallocated Employee Tree">
+                            <field name="date"/>
+                                             </tree>
+            </field>
+     </record>
+
+        <record id="unallocated_employee_action" model="ir.actions.act_window">
+          <field name="name">Unallocated Employee Details</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">unalloc.employee</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+<!--    <record id="planning_slot_view_form" model="ir.ui.view">-->
+<!--        <field name="name">planning.slot.form</field>-->
+<!--        <field name="model">planning.slot</field>-->
+<!--        <field name="inherit_id" ref="planning.planning_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--&lt;!&ndash;            <xpath expr="//field[@name='role_id']" position="after">&ndash;&gt;-->
+<!--                <field name="employee_id" widget="many2many_tags"/>-->
+<!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <menuitem id="unallocated_employee_details_menu" name="Unallocated Employee Details" parent="planning.planning_menu_settings" action="unallocated_employee_action" sequence="50"/>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unalloc_employee_user,unalloc.employee,model_unalloc_employee,base.group_user,1,1,1,1
+access_unalloc_employee_line_user,unalloc.employee.line,model_unalloc_employee_line,base.group_user,1,1,1,1
+

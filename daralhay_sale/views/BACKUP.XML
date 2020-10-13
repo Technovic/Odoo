@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sales_order_approval" model="ir.ui.view">
+            <field name="name">sale.order.approval.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="require_foc" />
+            </xpath>
+                <xpath expr="//group[@name='sale_shipping']" position="inside">
+                                    <label for="delivery_type" string="Delivery Type"/>
+                                    <div class="o_row">
+                                        <field name="delivery_type"/>
+                                    </div>
+                    <label for="choose_warehouse" string="Outlet"/>
+                                    <div class="o_row">
+                    <field name="choose_warehouse" attrs="{'invisible': [('delivery_type', '!=', 'pickup')]}"/>
+                                    </div>
+
+            </xpath>
+            </field>
+        </record>
+
+         <record id="deliverytracking)vpicktree_inherit_stock_picking_batch" model="ir.ui.view">
+            <field name="name">stock.picking.tree.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//field[@name='origin']" position="after">
+                <field name="delivery_type" />
+            </xpath>
+
+                <xpath expr="//form//header//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">
+                        "draft,confirmed,partially_available,assigned,issued,received,done"</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][1]" position="replace">
+                    <button name="button_validate"
+                        attrs="{'invisible': ['|',('delivery_type','=', 'pickup'),('delivery_type','=', False)]}"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        />
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                    <button name="button_validate"
+                        attrs="{'invisible': [('state', 'in', ('assigned','issued','done','waiting')) AND
+                        ('delivery_type','=', 'pickup'),'|',('delivery_type','=', 'False')]}"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        />
+                </xpath>
+
+
+        <xpath expr="//form//header//button[@name='action_cancel']" position="after">
+                    <button name="button_issue" string="Stock Transfer Issue" type="object" states="assigned"
+                            class="btn-primary"
+                            attrs="{'invisible':['|',('state', '=', 'issued'),('delivery_type','=', 'delivery'),
+                             ('delivery_type','=', False)]}"/>
+
+<!--                            , ('delivery_type','=', 'delivery'),'|',('delivery_type','=', False)]}"/>-->
+                </xpath>
+
+<!--                <xpath expr="//button[@name='button_issue'][1]" position="replace">-->
+<!--                    <button name="button_issue"-->
+<!--                        attrs="{'invisible': [('state', '=', 'issued'),('delivery_type','=', 'delivery'),'|',-->
+<!--                        ('delivery_type','=', False)]}"-->
+<!--                        string="Stock Transfer Issue"-->
+<!--                        type="object"-->
+<!--                        class="oe_highlight"-->
+<!--                        />-->
+<!--                </xpath>-->
+
+                <xpath expr="//button[@name='button_issue'][1]" position="attributes">
+                    <button name="button_issue"
+                        attrs="{'invisible':['|',('delivery_type','=', 'delivery'),('delivery_type','=', False)]}"/>
+
+                </xpath>
+
+                <xpath expr="//form//header//button[@name='action_cancel']" position="after">
+                    <button name="button_receive" string="Stock Transfer Received" type="object" states="issued"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sales_order_approval" model="ir.ui.view">
+            <field name="name">sale.order.approval.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="require_foc" />
+            </xpath>
+                <xpath expr="//group[@name='sale_shipping']" position="inside">
+                                    <label for="delivery_type" string="Delivery Type"/>
+                                    <div class="o_row">
+                                        <field name="delivery_type"/>
+                                    </div>
+                    <label for="choose_warehouse" string="Outlet"/>
+                                    <div class="o_row">
+                    <field name="choose_warehouse" attrs="{'invisible': [('delivery_type', '!=', 'pickup')]}"/>
+                                    </div>
+
+            </xpath>
+            </field>
+        </record>
+
+         <record id="deliverytracking)vpicktree_inherit_stock_picking_batch" model="ir.ui.view">
+            <field name="name">stock.picking.tree.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//field[@name='origin']" position="after">
+                <field name="delivery_type" />
+            </xpath>
+
+                <xpath expr="//form//header//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">
+                        "draft,confirmed,partially_available,assigned,issued,received,done"</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][1]" position="replace">
+                    <button name="button_validate"
+                        attrs="{'invisible': ['|',('delivery_type','=', 'pickup'),('delivery_type','=', False)]}"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        />
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                    <button name="button_validate"
+                        attrs="{'invisible': [('state', 'in', ('assigned','issued','done','waiting')) AND
+                        ('delivery_type','=', 'pickup'),'|',('delivery_type','=', 'False')]}"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        />
+                </xpath>
+
+
+        <xpath expr="//form//header//button[@name='action_cancel']" position="after">
+                    <button name="button_issue" string="Stock Transfer Issue" type="object" states="assigned"
+                            class="btn-primary" attrs="{'invisible':[[('state', 'in', ('issued')),
+                            ('delivery_type','=', 'delivery'),'|',('delivery_type','=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='button_issue'][1]" position="replace">
+                    <button name="button_issue"
+                        attrs="{'invisible': [('state', 'in', ('issued'))
+                            , ('delivery_type','=', 'delivery'),'|',('delivery_type','=', False)]}"
+                        string="Stock Transfer Issue"
+                        type="object"
+                        class="oe_highlight"
+                        />
+                </xpath>
+
+                <xpath expr="//form//header//button[@name='action_cancel']" position="after">
+                    <button name="button_receive" string="Stock Transfer Received" type="object" states="issued"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

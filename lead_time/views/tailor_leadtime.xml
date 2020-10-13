@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<!-- Project -->
+      <record id="edit_mrp_production" model="ir.ui.view">
+            <field name="name">production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='user_id']" position="after">
+                     <field name="employeee_name" widget="many2many_tags"/>
+                     <field name="shortt_name"/>
+                 </xpath>
+            </field>
+      </record>
+</odoo>

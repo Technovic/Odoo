@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="delivery_slip_format" model="report.paperformat">
+            <field name="name">Delivery Notes</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">150</field>
+            <field name="page_width">240</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+        <report
+            string="Delivery Notes"
+            id="action_delivery_generate"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="gatepass_slip.report_delivery_slip"
+            file="gatepass_slip.report_delivery_slip"
+            paperformat="gatepass_slip.delivery_slip_format"/>
+    </data>
+</odoo>
