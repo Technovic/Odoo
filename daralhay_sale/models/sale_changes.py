@@ -125,12 +125,13 @@ class deliveryNotification(models.Model):
                                                                                 'Internal Transfers'), ('note', '=',
                                                                                                         'Stock Issued')])
         if picking:
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking.origin)
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking.note)
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking.move_ids_without_package.product_uom_qty)
-            for i in picking.move_ids_without_package:
-                i.quantity_done = i.product_uom_qty
-                picking.write({'state': "done"})
+            for j in picking:
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.origin)
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.note)
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.move_ids_without_package.product_uom_qty)
+                for i in j.move_ids_without_package:
+                    i.quantity_done = i.product_uom_qty
+                    picking.write({'state': "done"})
         return self.write({"state": "issued"})
 
     def button_receive(self):
@@ -138,10 +139,11 @@ class deliveryNotification(models.Model):
                                                                                    'Internal Transfers'), ('note', '=',
                                                                                                            'Stock Received')])
         if picking_recived:
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking_recived.origin)
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking_recived.note)
-            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', picking_recived.move_ids_without_package.product_uom_qty)
-            for a in picking_recived.move_ids_without_package:
-                a.quantity_done = a.product_uom_qty
-                picking_recived.write({'state': "done"})
+            for j in picking_recived:
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.origin)
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.note)
+                print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', j.move_ids_without_package.product_uom_qty)
+                for a in j.move_ids_without_package:
+                    a.quantity_done = a.product_uom_qty
+                    picking_recived.write({'state': "done"})
         return self.write({"state": "received"})
